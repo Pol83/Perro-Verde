@@ -7,7 +7,7 @@
     <meta name="author" content="Dashboard">
     <meta name="keyword" content="Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
 
-    <title>PERRO VERDE</title>
+    <title>DASHGUM - FREE Bootstrap Admin Template</title>
 
     <!-- Bootstrap core CSS -->
     <link href="assets/css/bootstrap.css" rel="stylesheet">
@@ -42,7 +42,7 @@
                   <div class="fa fa-bars tooltips" data-placement="right" data-original-title="Toggle Navigation"></div>
               </div>
             <!--logo start-->
-            <a href="index.html" class="logo"><b>PERRO VERDE</b></a>
+            <a href="index_PV.html" class="logo"><b>PERRO VERDE</b></a>
             <!--logo end-->
             <div class="nav notify-row" id="top_menu">
                 <!--  notification start -->
@@ -68,23 +68,24 @@
               <!-- sidebar menu start-->
               <ul class="sidebar-menu" id="nav-accordion">
               
-              	  <p class="centered"><a href="profile.html"><img src="assets/img/ui-sam.jpg" class="img-circle" width="60"></a></p>
-              	  <h5 class="centered">YOUR NAME HERE</h5>
+              	  <p class="centered"><a href="profile_PV.html"><img src="assets/img/ui-sam.jpg" class="img-circle" width="60"></a></p>
+              	  <h5 class="centered">¡Hola Pitu!</h5>
               	  	
                   <li class="mt">
-                      <a class="active" href="index_PV.html">
+                      <a href="index_PV.html">
                           <i class="fa fa-dashboard"></i>
                           <span>Dashboard</span>
                       </a>
                   </li>
 
                   <li class="sub-menu">
-                      <a href="Addprod_PV.html" >
+                      <a class="active" href="javascript:;" >
                           <i class="fa fa-desktop"></i>
                           <span>Añadir Productos</span>
                       </a>
                      
 
+                   
                 
               </ul>
               <!-- sidebar menu end-->
@@ -101,25 +102,129 @@
 
               <div class="row">
                   <div class="col-lg-9 main-chart">
+
+<style>
+  .thumb {
+    height: 75px;
+    border: 1px solid #000;
+    margin: 10px 5px 0 0;
+	
+  }
+  
+</style>
+<input type="file" id="files" name="files[]" multiple /><br />
+<output id="list-miniatura"></output>
+<script>
+  function handleFileSelect(evt) {
+    var files = evt.target.files; // FileList object
+ 
+    // Loop through the FileList and render image files as thumbnails.
+    for (var i = 0, f; f = files[i]; i++) {
+ 
+      // Only process image files.
+      if (!f.type.match('image.*')) {
+        continue;
+      }
+ 
+      var reader = new FileReader();
+ 
+      // Closure to capture the file information.
+      reader.onload = (function(theFile) {
+        return function(e) {
+          // Render thumbnail.
+          var span = document.createElement('span');
+          span.innerHTML = ['Nombre: ', escape(theFile.name), ' || Tamanio: ', escape(theFile.size), ' bytes || type: ', escape(theFile.type), '<br /><img class="thumb" src="', e.target.result,'" title="', escape(theFile.name), '"/><br />'].join('');
+          document.getElementById('list-miniatura').insertBefore(span, null);
+        };
+      })(f);
+ 
+      // Read in the image file as a data URL.
+      reader.readAsDataURL(f);
+    }
+  }
+ 
+  document.getElementById('files').addEventListener('change', handleFileSelect, false);
+</script>
+
+ 
+
+<style>
+  .thumb {
+    height: 75px;
+    border: 1px solid #000;
+    margin: 10px 5px 0 0;
+  }
+  #drop_zone{
+	  border: #7ac142  3px dashed;
+	  width:300px;
+	  height:100px;
+  }
+</style>
+<div id="drop_zone"><br /><center>¡Arrastra aquí tu archivo!</center></div><br />
+<output id="list-miniatura"></output>
+<script>
+  function handleFileSelect(evt) {
+    evt.stopPropagation();
+    evt.preventDefault();
+ 
+    var files = evt.dataTransfer.files; // FileList object.
+    // files is a FileList of File objects. List some properties.
+    var output = [];
+    for (var i = 0, f; f = files[i]; i++) {
+      var reader = new FileReader();
+ 
+      // Closure to capture the file information.
+      reader.onload = (function(theFile) {
+        return function(e) {
+          // Render thumbnail.
+          var span = document.createElement('span');
+          span.innerHTML = ['Nombre: ', escape(theFile.name), ' || Tamanio: ', escape(theFile.size), ' bytes || type: ', escape(theFile.type), '<br /><img class="thumb" src="', e.target.result,'" title="', escape(theFile.name), '"/><br />'].join('');
+          document.getElementById('list-miniatura').insertBefore(span, null);
+        };
+      })(f);
+ 
+      // Read in the image file as a data URL.
+      reader.readAsDataURL(f);
+    }
+    document.getElementById('list-datos').innerHTML = '<ul>' + output.join('') + '</ul>';
+  }
+ 
+  function handleDragOver(evt) {
+    evt.stopPropagation();
+    evt.preventDefault();
+    evt.dataTransfer.dropEffect = 'copy'; // Explicitly show this is a copy.
+  }
+ 
+  // Setup the dnd listeners.
+  var dropZone = document.getElementById('drop_zone');
+  dropZone.addEventListener('dragover', handleDragOver, false);
+  dropZone.addEventListener('drop', handleFileSelect, false);
+</script>
+
+<form method="post" action="uploader.php"> 
+<label>Nombre:</label> <br> <input type="text" name="name" style="width:300px;" /> <br> <br>
+<label>Descripción:</label> <br> 
+
+<input type="text" name="name" style="width:300px; height:100px;"  /> <br> <br>
+
+<input type="submit" value="¡Aceptar!" style="background-color:#7ac142; color:white;" />  
+  
+  </div>
+</form>
+
+
+               
+               
+                 <!--- <form action="file2.php" method="post" enctype="multipart/form-data">
+				¡Selecciona tu diseño!<br/>
+				<input type="file" name="archivo_foto"><br>
+				<input type="submit" value="Envíame!">
+				</form> ---!>
+
+                  
                   </div>
             	  </div><!-- /row mt -->	
                   
-                 
-                  
-                                       <!-- SERVER STATUS PANELS -->
-                      	<div class="col-md-4 col-sm-4 mb">
-                      		<div class="white-panel pn donut-chart">
-                      			<div class="white-header">
-                      			<div class="fs1" aria-hidden="true" data-icon=""></div>
-                      			</div>
-                      			<div>
-								<img src="Doodler3d_detalle.png" />
-								</div>
-	                      	</div><! --/grey-panel -->
-                      	</div><!-- /col-md-4-->
-                      	
-
-                      
                       
                       
                   
@@ -129,84 +234,7 @@
                   
                   
       </footer>
-      <!--footer end-->
-  </section>
-
-    <!-- js placed at the end of the document so the pages load faster -->
-    <script src="assets/js/jquery.js"></script>
-    <script src="assets/js/jquery-1.8.3.min.js"></script>
-    <script src="assets/js/bootstrap.min.js"></script>
-    <script class="include" type="text/javascript" src="assets/js/jquery.dcjqaccordion.2.7.js"></script>
-    <script src="assets/js/jquery.scrollTo.min.js"></script>
-    <script src="assets/js/jquery.nicescroll.js" type="text/javascript"></script>
-    <script src="assets/js/jquery.sparkline.js"></script>
-
-
-    <!--common script for all pages-->
-    <script src="assets/js/common-scripts.js"></script>
     
-    <script type="text/javascript" src="assets/js/gritter/js/jquery.gritter.js"></script>
-    <script type="text/javascript" src="assets/js/gritter-conf.js"></script>
-
-    <!--script for this page-->
-    <script src="assets/js/sparkline-chart.js"></script>    
-	<script src="assets/js/zabuto_calendar.js"></script>	
-	
-	<script type="text/javascript">
-        $(document).ready(function () {
-        var unique_id = $.gritter.add({
-            // (string | mandatory) the heading of the notification
-            title: 'Bienvenido a Perro Verde!',
-            // (string | mandatory) the text inside the notification
-            text: 'Esperamos que aquí encuentres lo que buscas, cosas de diseño, elegantes y a buen precio. Sino encuentras sentido a la vida, puedes hallar la fe en <a href="https://giphy.com/gifs/jesus-gMHFX7PEDZEHK" target="_blank" style="color:#ffd777">JESUX</a>.',
-            // (string | optional) the image to display on the left
-            image: 'assets/img/ui-sam.jpg',
-            // (bool | optional) if you want it to fade out on its own or just sit there
-            sticky: true,
-            // (int | optional) the time you want it to be alive for before fading out
-            time: '',
-            // (string | optional) the class name you want to apply to that specific message
-            class_name: 'my-sticky-class'
-        });
-
-        return false;
-        });
-	</script>
-	
-	<script type="application/javascript">
-        $(document).ready(function () {
-            $("#date-popover").popover({html: true, trigger: "manual"});
-            $("#date-popover").hide();
-            $("#date-popover").click(function (e) {
-                $(this).hide();
-            });
-        
-            $("#my-calendar").zabuto_calendar({
-                action: function () {
-                    return myDateFunction(this.id, false);
-                },
-                action_nav: function () {
-                    return myNavFunction(this.id);
-                },
-                ajax: {
-                    url: "show_data.php?action=1",
-                    modal: true
-                },
-                legend: [
-                    {type: "text", label: "Special event", badge: "00"},
-                    {type: "block", label: "Regular event", }
-                ]
-            });
-        });
-        
-        
-        function myNavFunction(id) {
-            $("#date-popover").hide();
-            var nav = $("#" + id).data("navigation");
-            var to = $("#" + id).data("to");
-            console.log('nav ' + nav + ' to: ' + to.month + '/' + to.year);
-        }
-    </script>
   
 
   </body>
